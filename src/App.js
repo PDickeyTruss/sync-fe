@@ -7,7 +7,13 @@ import {Employee} from './screens/Employee'
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      <header
+        style={{
+          border: '1px solid black',
+          boxShadow: '2px 2px 2px 1px grey',
+          margin: 8,
+        }}
+      >
         <h3>Sync FE</h3>
         <nav>
           <ul>
@@ -24,17 +30,25 @@ function App() {
         </nav>
       </header>
 
-      <Switch>
-        <Route path="/home">
-          <Home />
-        </Route>
-        <Route path="/employee">
-          <Employee />
-        </Route>
-        <Route path="/department">
-          <Department />
-        </Route>
-      </Switch>
+      <div
+        style={{
+          border: '1px solid black',
+          boxShadow: '2px 2px 2px 1px grey',
+          margin: 8,
+        }}
+      >
+        <Switch>
+          <Route path="/home">
+            <Home />
+          </Route>
+          <Route path="/employee">
+            <Employee />
+          </Route>
+          <Route path="/department">
+            <Department />
+          </Route>
+        </Switch>
+      </div>
     </div>
   )
 }
