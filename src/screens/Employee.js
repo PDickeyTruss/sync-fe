@@ -1,11 +1,11 @@
 import {useEmployees} from '../utils/employees'
-
+import {Title} from '../components/Title'
 const Employee = () => {
   const {employees, error, isLoading, isError, isSuccess} = useEmployees()
 
   return (
     <div>
-      <h3>{`This is the Employee Page`}</h3>
+      <Title>Employees</Title>
       <table>
         <thead>
           <tr>
@@ -14,14 +14,18 @@ const Employee = () => {
           </tr>
         </thead>
         <tbody>
-          {employees
-            ? employees.map(e => (
-                <tr>
-                  <td>{e.EmployeeId}</td>
-                  <td>{e.EmployeeName}</td>
-                </tr>
-              ))
-            : 'Loading'}
+          {employees ? (
+            employees.map(e => (
+              <tr key={e.EmployeeId}>
+                <td>{e.EmployeeId}</td>
+                <td>{e.EmployeeName}</td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td>Loading</td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>

@@ -1,54 +1,46 @@
+import React from 'react'
+import {makeStyles} from '@material-ui/core/styles'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import {Box, Container} from '@material-ui/core'
+
 import './App.css'
-import {Route, Switch, NavLink} from 'react-router-dom'
-import {Home} from './screens/Home'
-import {Department} from './screens/Department'
-import {Employee} from './screens/Employee'
+import {Dashboard} from './ui/Dashboard'
+import {AppRoutes} from './screens/AppRoutes'
+import {Copyright} from './components/Copyright'
 
-function App() {
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: 'flex',
+  },
+  appBarSpacer: theme.mixins.toolbar,
+  content: {
+    flexGrow: 1,
+    height: '100vh',
+    overflow: 'auto',
+  },
+  container: {
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4),
+  },
+}))
+
+function App(props) {
+  const classes = useStyles()
+
   return (
-    <div className="App">
-      <header
-        style={{
-          border: '1px solid black',
-          boxShadow: '2px 2px 2px 1px grey',
-          margin: 8,
-        }}
-      >
-        <h3>Sync FE</h3>
-        <nav>
-          <ul>
-            <li>
-              <NavLink to="/home">Home</NavLink>
-            </li>
-            <li>
-              <NavLink to="/department">Department</NavLink>
-            </li>
-            <li>
-              <NavLink to="/employee">Employee</NavLink>
-            </li>
-          </ul>
-        </nav>
-      </header>
-
-      <div
-        style={{
-          border: '1px solid black',
-          boxShadow: '2px 2px 2px 1px grey',
-          margin: 8,
-        }}
-      >
-        <Switch>
-          <Route path="/home">
-            <Home />
-          </Route>
-          <Route path="/employee">
-            <Employee />
-          </Route>
-          <Route path="/department">
-            <Department />
-          </Route>
-        </Switch>
-      </div>
+    <div className={classes.root}>
+      <CssBaseline />
+      <Dashboard {...props}>
+        <main className={classes.content}>
+          <div className={classes.appBarSpacer} />
+          <Container maxWidth="lg" className={classes.container}>
+            <AppRoutes {...props} />
+            <Box pt={4}>
+              <Copyright />
+            </Box>
+          </Container>
+        </main>
+      </Dashboard>
     </div>
   )
 }

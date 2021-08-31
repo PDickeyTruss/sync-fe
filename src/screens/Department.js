@@ -14,14 +14,18 @@ const Department = () => {
           </tr>
         </thead>
         <tbody>
-          {departments
-            ? departments.map(d => (
-                <tr>
-                  <td>{d.DepartmentId}</td>
-                  <td>{d.DepartmentName}</td>
-                </tr>
-              ))
-            : 'Loading'}
+          {departments ? (
+            departments.map(d => (
+              <tr key={d.DepartmentId}>
+                <td>{d.DepartmentId}</td>
+                <td>{d.DepartmentName}</td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td>Loading</td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>
