@@ -1,7 +1,7 @@
 import React from 'react'
 
-import {AppBar} from '../ui/AppBar'
-import {SideNav} from '../ui/SideNav'
+import {AppBar} from 'ui/AppBar'
+import {SideNav} from 'ui/SideNav'
 
 function Dashboard({children}) {
   const [open, setOpen] = React.useState(true)

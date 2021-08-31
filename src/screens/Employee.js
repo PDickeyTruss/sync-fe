@@ -1,5 +1,5 @@
-import {useEmployees} from '../utils/employees'
-import {Title} from '../components/Title'
+import {useEmployees} from 'utils/employees'
+import {Title} from 'components/Title'
 const Employee = () => {
   const {employees, error, isLoading, isError, isSuccess} = useEmployees()
 

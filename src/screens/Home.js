@@ -5,9 +5,9 @@ import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import Link from '@material-ui/core/Link'
-import {Title} from '../components/Title'
-import {Employee} from './Employee'
-import {Department} from './Department'
+import {Title} from 'components/Title'
+import {Employee} from 'screens/Employee'
+import {Department} from 'screens/Department'
 
 const useStyles = makeStyles(theme => ({
   paper: {

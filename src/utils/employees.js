@@ -1,5 +1,5 @@
 import {useQuery} from 'react-query'
-import {client} from './api-client'
+import {client} from 'utils/api-client'
 
 function useEmployees() {
   const result = useQuery({

@@ -3,10 +3,10 @@ import {makeStyles} from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import {Box, Container} from '@material-ui/core'
 
-import './App.css'
-import {Dashboard} from './ui/Dashboard'
-import {AppRoutes} from './screens/AppRoutes'
-import {Copyright} from './components/Copyright'
+import 'App.css'
+import {Dashboard} from 'ui/Dashboard'
+import {AppRoutes} from 'routing/AppRoutes'
+import {Copyright} from 'components/Copyright'
 
 const useStyles = makeStyles(theme => ({
   root: {

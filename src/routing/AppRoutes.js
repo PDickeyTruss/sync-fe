@@ -1,7 +1,7 @@
 import {Route, Switch} from 'react-router-dom'
-import {Home} from './Home'
-import {Department} from './Department'
-import {Employee} from './Employee'
+import {Home} from 'screens/Home'
+import {Department} from 'screens/Department'
+import {Employee} from 'screens/Employee'
 
 function AppRoutes(props) {
   return (

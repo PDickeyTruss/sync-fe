@@ -1,4 +1,4 @@
-import {useDepartments} from '../utils/departments'
+import {useDepartments} from 'utils/departments'
 
 const Department = () => {
   const {departments, error, isLoading, isError, isSuccess} = useDepartments()
