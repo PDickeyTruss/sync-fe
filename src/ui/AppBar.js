@@ -11,6 +11,8 @@ import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import NotificationsIcon from '@material-ui/icons/Notifications'
 
+import {ThemeToggle} from 'components/ThemeToggle'
+
 function AppBar({open, openDrawer, drawerWidth}) {
   const useStyles = makeStyles(theme => ({
     toolbar: {
@@ -70,6 +72,7 @@ function AppBar({open, openDrawer, drawerWidth}) {
         >
           Dashboard
         </Typography>
+        <ThemeToggle />
         <IconButton color="inherit">
           <Badge badgeContent={4} color="secondary">
             <NotificationsIcon />

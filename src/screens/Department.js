@@ -1,11 +1,12 @@
 import {useDepartments} from 'utils/departments'
-
+import {Title} from 'components/Title'
+import {Box} from '@material-ui/core'
 const Department = () => {
   const {departments, error, isLoading, isError, isSuccess} = useDepartments()
 
   return (
-    <div>
-      <h3>{`This is the Department Page`}</h3>
+    <Box>
+      <Title>Department</Title>
       <table>
         <thead>
           <tr>
@@ -28,7 +29,7 @@ const Department = () => {
           )}
         </tbody>
       </table>
-    </div>
+    </Box>
   )
 }
 
