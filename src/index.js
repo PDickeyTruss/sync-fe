@@ -4,6 +4,7 @@ import 'index.css'
 import App from 'App'
 import {BrowserRouter as Router} from 'react-router-dom'
 import {QueryClientProvider, QueryClient} from 'react-query'
+import {ThemeProvider} from 'theme'
 
 const queryConfig = {
   defaultOptions: {
@@ -24,7 +25,9 @@ const queryClient = new QueryClient(queryConfig)
 ReactDOM.render(
   <QueryClientProvider client={queryClient}>
     <Router>
-      <App />
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
     </Router>
   </QueryClientProvider>,
   document.getElementById('root'),
