@@ -60,7 +60,6 @@ function ThemeProvider(props) {
   }
 
   const theme = createTheme(isDarkMode ? darkTheme : lightTheme)
-  console.log('theme', theme)
   return (
     <MuiThemeProvider theme={theme}>
       <ThemeContext.Provider value={value} {...props} />
