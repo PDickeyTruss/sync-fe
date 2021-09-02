@@ -26,8 +26,23 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+function buildDateString() {
+  const now = new Date()
+  const dateString =
+    now.getFullYear() +
+    '-' +
+    ('0' + (now.getMonth() + 1)).slice(-2) +
+    '-' +
+    ('0' + now.getDate()).slice(-2)
+
+  return dateString
+}
+
 function EmployeeDialog() {
+  const classes = useStyles()
+
   const [open, setOpen] = React.useState(false)
+
   const [department, setDepartment] = React.useState('')
 
   const {departments} = useDepartments()
@@ -57,15 +72,6 @@ function EmployeeDialog() {
     setDepartment('')
     setOpen(false)
   }
-
-  const classes = useStyles()
-  const now = new Date()
-  const dateString =
-    now.getFullYear() +
-    '-' +
-    ('0' + (now.getMonth() + 1)).slice(-2) +
-    '-' +
-    ('0' + now.getDate()).slice(-2)
 
   return (
     <React.Fragment>
@@ -127,7 +133,7 @@ function EmployeeDialog() {
               label="Date of Hire"
               type="date"
               fullWidth
-              defaultValue={dateString}
+              defaultValue={buildDateString()}
               InputLabelProps={{
                 shrink: true,
               }}
