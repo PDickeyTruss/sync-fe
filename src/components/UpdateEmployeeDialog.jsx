@@ -11,10 +11,12 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
+  IconButton,
 } from '@material-ui/core'
-import AddCircleIcon from '@material-ui/icons/AddCircle'
+
+import UpdateIcon from '@material-ui/icons/Update'
 import {makeStyles} from '@material-ui/core/styles'
-import {useCreateEmployee} from 'utils/employees'
+import {useUpdateEmployee} from 'utils/employees'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,29 +28,18 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-function buildDateString() {
-  const now = new Date()
-  const dateString =
-    now.getFullYear() +
-    '-' +
-    ('0' + (now.getMonth() + 1)).slice(-2) +
-    '-' +
-    ('0' + now.getDate()).slice(-2)
-
-  return dateString
-}
-
-function EmployeeDialog() {
+function UpdateEmployeeDialog(employee) {
   const classes = useStyles()
+  const {EmployeeName, DateOfHire, Department} = employee
 
   const [open, setOpen] = React.useState(false)
-
   const [department, setDepartment] = React.useState('')
 
   const {departments} = useDepartments()
-  const {mutate: createEmployee} = useCreateEmployee()
+  const {mutate: updateEmployee} = useUpdateEmployee()
 
   const handleClickOpen = () => {
+    setDepartment(Department)
     setOpen(true)
   }
 
@@ -61,13 +52,14 @@ function EmployeeDialog() {
     event.preventDefault()
 
     const eventElems = event.target.elements
-    const newEmployee = {
+    const updatedEmployee = {
+      ...employee,
       EmployeeName: eventElems['employee-name'].value,
       DateOfHire: eventElems['hire-date'].value,
       Department: department,
     }
 
-    createEmployee({data: newEmployee})
+    updateEmployee({data: updatedEmployee})
 
     setDepartment('')
     setOpen(false)
@@ -75,16 +67,12 @@ function EmployeeDialog() {
 
   return (
     <React.Fragment>
-      <Button
-        aria-label="add employee"
-        variant="contained"
-        color="primary"
-        startIcon={<AddCircleIcon />}
-        style={{marginBottom: 8}}
-        onClick={handleClickOpen}
+      <IconButton
+        style={{padding: 0, marginLeft: 8, marginRight: 8}}
+        onClick={() => handleClickOpen()}
       >
-        Add
-      </Button>
+        <UpdateIcon />
+      </IconButton>
 
       <Dialog
         open={open}
@@ -94,7 +82,7 @@ function EmployeeDialog() {
         maxWidth="xs"
       >
         <form onSubmit={handleSubmit} className={classes.root}>
-          <DialogTitle id="form-dialog-title">Add Employee</DialogTitle>
+          <DialogTitle id="form-dialog-title">Edit Employee</DialogTitle>
           <DialogContent>
             <TextField
               autoFocus
@@ -104,6 +92,7 @@ function EmployeeDialog() {
               InputLabelProps={{
                 shrink: true,
               }}
+              defaultValue={EmployeeName}
             />
 
             <FormControl className={classes.formControl} fullWidth>
@@ -133,7 +122,7 @@ function EmployeeDialog() {
               label="Date of Hire"
               type="date"
               fullWidth
-              defaultValue={buildDateString()}
+              defaultValue={DateOfHire}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -153,4 +142,4 @@ function EmployeeDialog() {
   )
 }
 
-export {EmployeeDialog}
+export {UpdateEmployeeDialog}

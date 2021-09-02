@@ -12,18 +12,22 @@ import {
   IconButton,
 } from '@material-ui/core'
 
-import UpdateIcon from '@material-ui/icons/Update'
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline'
 
 import {Title} from 'components/Title'
 import {EmployeeDialog} from 'components/EmployeeDialog'
+import {UpdateEmployeeDialog} from 'components/UpdateEmployeeDialog'
 import {useEmployees, useDeleteEmployee} from 'utils/employees'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   table: {
     minWidth: 650,
   },
-})
+  paper: {
+    padding: theme.spacing(2),
+    width: '100%',
+  },
+}))
 
 const Employee = () => {
   const classes = useStyles()
@@ -32,7 +36,7 @@ const Employee = () => {
   const {mutate: handleDelete} = useDeleteEmployee({throwOnError: true})
 
   return (
-    <div style={{width: '100%'}}>
+    <Paper className={classes.paper}>
       <Box display="flex">
         <Box flexGrow={1}>
           <Title>Employees</Title>
@@ -65,11 +69,7 @@ const Employee = () => {
                     size="small"
                     style={{width: '128px'}}
                   >
-                    <IconButton
-                      style={{padding: 0, marginLeft: 8, marginRight: 8}}
-                    >
-                      <UpdateIcon />
-                    </IconButton>
+                    <UpdateEmployeeDialog {...e} />
                     <IconButton
                       style={{padding: 0, marginLeft: 8, marginRight: 8}}
                       onClick={() => handleDelete(e.EmployeeId)}
@@ -87,7 +87,7 @@ const Employee = () => {
           </TableBody>
         </Table>
       </TableContainer>
-    </div>
+    </Paper>
   )
 }
 

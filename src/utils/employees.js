@@ -54,4 +54,16 @@ function useCreateEmployee(options) {
   })
 }
 
-export {useCreateEmployee, useDeleteEmployee, useEmployees}
+function useUpdateEmployee(options) {
+  const {defaultMutationOptions} = useDefaultOptions()
+
+  return useMutation(
+    employee => client('employee', {...employee, method: 'PUT'}),
+    {
+      ...defaultMutationOptions,
+      ...options,
+    },
+  )
+}
+
+export {useCreateEmployee, useDeleteEmployee, useEmployees, useUpdateEmployee}

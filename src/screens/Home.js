@@ -54,9 +54,7 @@ function Home(props) {
       </Grid>
       {/* Employees */}
       <Grid item xs={12}>
-        <Paper className={classes.paper}>
-          <Employee {...props} />
-        </Paper>
+        <Employee {...props} />
       </Grid>
     </Grid>
   )
