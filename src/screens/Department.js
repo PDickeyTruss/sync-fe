@@ -6,7 +6,7 @@ const Department = () => {
 
   return (
     <Box>
-      <Title>Department</Title>
+      <Title>Departments</Title>
       <table>
         <thead>
           <tr>

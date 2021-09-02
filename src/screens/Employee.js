@@ -1,17 +1,23 @@
 import React from 'react'
 import {makeStyles} from '@material-ui/core/styles'
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TableCell from '@material-ui/core/TableCell'
-import TableContainer from '@material-ui/core/TableContainer'
-import TableHead from '@material-ui/core/TableHead'
-import TableRow from '@material-ui/core/TableRow'
-import Paper from '@material-ui/core/Paper'
-import Box from '@material-ui/core/Box'
-import {AddButton} from 'components/AddButton'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Box,
+  IconButton,
+} from '@material-ui/core'
+
+import UpdateIcon from '@material-ui/icons/Update'
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline'
 
 import {Title} from 'components/Title'
-import {useEmployees} from 'utils/employees'
+import {EmployeeDialog} from 'components/EmployeeDialog'
+import {useEmployees, useDeleteEmployee} from 'utils/employees'
 
 const useStyles = makeStyles({
   table: {
@@ -23,6 +29,7 @@ const Employee = () => {
   const classes = useStyles()
 
   const {employees, error, isLoading, isError, isSuccess} = useEmployees()
+  const {mutate: handleDelete} = useDeleteEmployee({throwOnError: true})
 
   return (
     <div style={{width: '100%'}}>
@@ -31,17 +38,18 @@ const Employee = () => {
           <Title>Employees</Title>
         </Box>
         <Box>
-          <AddButton />
+          <EmployeeDialog />
         </Box>
       </Box>
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} elevation={0}>
         <Table className={classes.table} aria-label="employees table">
           <TableHead>
             <TableRow>
               <TableCell>ID</TableCell>
               <TableCell>Name</TableCell>
               <TableCell>Department</TableCell>
-              <TableCell>Date Of Hire</TableCell>
+              <TableCell>Date of Hire</TableCell>
+              <TableCell />
             </TableRow>
           </TableHead>
           <TableBody>
@@ -52,6 +60,23 @@ const Employee = () => {
                   <TableCell>{e.EmployeeName}</TableCell>
                   <TableCell>{e.Department}</TableCell>
                   <TableCell>{e.DateOfHire}</TableCell>
+                  <TableCell
+                    align="right"
+                    size="small"
+                    style={{width: '128px'}}
+                  >
+                    <IconButton
+                      style={{padding: 0, marginLeft: 8, marginRight: 8}}
+                    >
+                      <UpdateIcon />
+                    </IconButton>
+                    <IconButton
+                      style={{padding: 0, marginLeft: 8, marginRight: 8}}
+                      onClick={() => handleDelete(e.EmployeeId)}
+                    >
+                      <DeleteOutlineIcon />
+                    </IconButton>
+                  </TableCell>
                 </TableRow>
               ))
             ) : (
