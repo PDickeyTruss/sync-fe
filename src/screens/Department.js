@@ -13,6 +13,7 @@ import {
 } from '@material-ui/core'
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline'
 
+import {AddDepartmentDialog} from 'components/AddDepartmentDialog'
 import {useDepartments, useDeleteDepartment} from 'utils/departments'
 import {Title} from 'components/Title'
 
@@ -37,7 +38,9 @@ const Department = () => {
         <Box flexGrow={1}>
           <Title>Departments</Title>
         </Box>
-        <Box>TODO</Box>
+        <Box>
+          <AddDepartmentDialog />
+        </Box>
       </Box>
       <TableContainer component={Paper} elevation={0}>
         <Table className={classes.table} aria-label="departments table">

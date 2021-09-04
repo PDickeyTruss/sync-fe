@@ -46,4 +46,13 @@ function useDeleteDepartment(options) {
   )
 }
 
-export {useDepartments, useDeleteDepartment}
+function useCreateDepartment(options) {
+  const {defaultMutationOptions} = useDefaultOptions()
+
+  return useMutation(department => client('department', department), {
+    ...defaultMutationOptions,
+    ...options,
+  })
+}
+
+export {useCreateDepartment, useDepartments, useDeleteDepartment}
