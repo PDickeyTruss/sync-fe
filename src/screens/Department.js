@@ -1,35 +1,82 @@
-import {useDepartments} from 'utils/departments'
+import React from 'react'
+import {makeStyles} from '@material-ui/core/styles'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Box,
+  IconButton,
+} from '@material-ui/core'
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline'
+
+import {useDepartments, useDeleteDepartment} from 'utils/departments'
 import {Title} from 'components/Title'
-import {Box} from '@material-ui/core'
+
+const useStyles = makeStyles(theme => ({
+  table: {
+    minWidth: 650,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    width: '100%',
+  },
+}))
+
 const Department = () => {
+  const classes = useStyles()
   const {departments, error, isLoading, isError, isSuccess} = useDepartments()
+  const {mutate: handleDelete} = useDeleteDepartment({throwOnError: true})
 
   return (
-    <Box>
-      <Title>Departments</Title>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-          </tr>
-        </thead>
-        <tbody>
-          {departments ? (
-            departments.map(d => (
-              <tr key={d.DepartmentId}>
-                <td>{d.DepartmentId}</td>
-                <td>{d.DepartmentName}</td>
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td>Loading</td>
-            </tr>
-          )}
-        </tbody>
-      </table>
-    </Box>
+    <Paper className={classes.paper}>
+      <Box display="flex">
+        <Box flexGrow={1}>
+          <Title>Departments</Title>
+        </Box>
+        <Box>TODO</Box>
+      </Box>
+      <TableContainer component={Paper} elevation={0}>
+        <Table className={classes.table} aria-label="departments table">
+          <TableHead>
+            <TableRow>
+              <TableCell>ID</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell />
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {departments ? (
+              departments.map(d => (
+                <TableRow key={d.DepartmentId}>
+                  <TableCell>{d.DepartmentId}</TableCell>
+                  <TableCell>{d.DepartmentName}</TableCell>
+                  <TableCell
+                    align="right"
+                    size="small"
+                    style={{width: '128px'}}
+                  >
+                    <IconButton
+                      style={{padding: 0, marginLeft: 8, marginRight: 8}}
+                      onClick={() => handleDelete(d.DepartmentId)}
+                    >
+                      <DeleteOutlineIcon />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell>Loading</TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Paper>
   )
 }
 
