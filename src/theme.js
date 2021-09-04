@@ -2,6 +2,8 @@ import React from 'react'
 import {createTheme} from '@material-ui/core/styles'
 import {ThemeProvider as MuiThemeProvider} from '@material-ui/styles'
 
+const localStorageKey = '__dark_mode__'
+
 const ThemeContext = React.createContext()
 ThemeContext.displayName = 'ThemeContext'
 
@@ -48,21 +50,25 @@ const lightTheme = {
 }
 
 function ThemeProvider(props) {
-  const [isDarkMode, setIsDarkMode] = React.useState(false)
+  const [isDarkMode, setIsDarkMode] = React.useState(() =>
+    JSON.parse(window.localStorage.getItem(localStorageKey)),
+  )
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode)
-  }
-
-  const value = {
-    isDarkMode: isDarkMode,
-    toggleDarkMode: toggleDarkMode,
+    window.localStorage.setItem(localStorageKey, !isDarkMode)
   }
 
   const theme = createTheme(isDarkMode ? darkTheme : lightTheme)
+  const contextValue = {
+    isDarkMode: isDarkMode,
+    toggleDarkMode: toggleDarkMode,
+    theme,
+  }
+
   return (
     <MuiThemeProvider theme={theme}>
-      <ThemeContext.Provider value={value} {...props} />
+      <ThemeContext.Provider value={contextValue} {...props} />
     </MuiThemeProvider>
   )
 }
