@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import Link from '@material-ui/core/Link'
 import {Title} from 'components/Title'
+import {Chart} from 'components/Chart'
 import {Employee} from 'screens/Employee'
 import {Department} from 'screens/Department'
 
@@ -32,7 +33,7 @@ function Home(props) {
       {/* Departments */}
       <Grid item xs={12} md={8} lg={9}>
         <Paper className={fixedHeightPaper}>
-          <Department {...props} />
+          <Chart />
         </Paper>
       </Grid>
       {/* Recent Deposits */}
@@ -52,7 +53,6 @@ function Home(props) {
           </div>
         </Paper>
       </Grid>
-      {/* Employees */}
       <Grid item xs={12}>
         <Employee {...props} />
       </Grid>
