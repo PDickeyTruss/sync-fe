@@ -15,7 +15,7 @@ import {
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline'
 
 import {Title} from 'components/Title'
-import {EmployeeDialog} from 'components/EmployeeDialog'
+import {AddEmployeeDialog} from 'components/AddEmployeeDialog'
 import {UpdateEmployeeDialog} from 'components/UpdateEmployeeDialog'
 import {useEmployees, useDeleteEmployee} from 'utils/employees'
 
@@ -42,7 +42,7 @@ const Employee = () => {
           <Title>Employees</Title>
         </Box>
         <Box>
-          <EmployeeDialog />
+          <AddEmployeeDialog />
         </Box>
       </Box>
       <TableContainer component={Paper} elevation={0}>

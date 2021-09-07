@@ -38,7 +38,7 @@ function buildDateString() {
   return dateString
 }
 
-function EmployeeDialog() {
+function AddEmployeeDialog() {
   const classes = useStyles()
 
   const [open, setOpen] = React.useState(false)
@@ -153,4 +153,4 @@ function EmployeeDialog() {
   )
 }
 
-export {EmployeeDialog}
+export {AddEmployeeDialog}
