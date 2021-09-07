@@ -6,11 +6,12 @@ import {
   DialogContent,
   DialogTitle,
   TextField,
+  IconButton,
 } from '@material-ui/core'
-import AddCircleIcon from '@material-ui/icons/AddCircle'
+import UpdateIcon from '@material-ui/icons/Update'
 import {makeStyles} from '@material-ui/core/styles'
 
-import {useCreateDepartment} from 'utils/departments'
+import {useUpdateDepartment} from 'utils/departments'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -22,12 +23,12 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-function AddDepartmentDialog() {
+function UpdateDepartmentDialog(department) {
   const classes = useStyles()
+  const {DepartmentName} = department
 
   const [open, setOpen] = React.useState(false)
-
-  const {createDepartment} = useCreateDepartment()
+  const {updateDepartment} = useUpdateDepartment()
 
   const handleClickOpen = () => {
     setOpen(true)
@@ -41,23 +42,23 @@ function AddDepartmentDialog() {
     event.preventDefault()
 
     const eventElems = event.target.elements
-    createDepartment(eventElems['department-name'].value)
+
+    updateDepartment({
+      ...department,
+      DepartmentName: eventElems['department-name'].value,
+    })
 
     setOpen(false)
   }
 
   return (
     <React.Fragment>
-      <Button
-        aria-label="add department"
-        variant="contained"
-        color="primary"
-        startIcon={<AddCircleIcon />}
-        style={{marginBottom: 8}}
-        onClick={handleClickOpen}
+      <IconButton
+        style={{padding: 0, marginLeft: 8, marginRight: 8}}
+        onClick={() => handleClickOpen()}
       >
-        Add
-      </Button>
+        <UpdateIcon />
+      </IconButton>
 
       <Dialog
         open={open}
@@ -67,7 +68,7 @@ function AddDepartmentDialog() {
         maxWidth="xs"
       >
         <form onSubmit={handleSubmit} className={classes.root}>
-          <DialogTitle id="form-dialog-title">Add Department</DialogTitle>
+          <DialogTitle id="form-dialog-title">Edit Department</DialogTitle>
           <DialogContent>
             <TextField
               autoFocus
@@ -77,6 +78,7 @@ function AddDepartmentDialog() {
               InputLabelProps={{
                 shrink: true,
               }}
+              defaultValue={DepartmentName}
             />
           </DialogContent>
           <DialogActions>
@@ -93,4 +95,4 @@ function AddDepartmentDialog() {
   )
 }
 
-export {AddDepartmentDialog}
+export {UpdateDepartmentDialog}

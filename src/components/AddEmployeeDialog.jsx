@@ -1,5 +1,4 @@
 import React from 'react'
-import {useDepartments} from 'utils/departments'
 import {
   Button,
   Dialog,
@@ -14,6 +13,8 @@ import {
 } from '@material-ui/core'
 import AddCircleIcon from '@material-ui/icons/AddCircle'
 import {makeStyles} from '@material-ui/core/styles'
+
+import {useDepartments} from 'utils/departments'
 import {useCreateEmployee} from 'utils/employees'
 
 const useStyles = makeStyles(theme => ({
@@ -46,7 +47,7 @@ function AddEmployeeDialog() {
   const [department, setDepartment] = React.useState('')
 
   const {departments} = useDepartments()
-  const {mutate: createEmployee} = useCreateEmployee()
+  const {createEmployee} = useCreateEmployee()
 
   const handleClickOpen = () => {
     setOpen(true)
@@ -67,7 +68,7 @@ function AddEmployeeDialog() {
       Department: department,
     }
 
-    createEmployee({data: newEmployee})
+    createEmployee(newEmployee)
 
     setDepartment('')
     setOpen(false)

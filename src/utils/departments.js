@@ -27,7 +27,7 @@ function useDefaultOptions() {
 function useDeleteDepartment(options) {
   const {defaultMutationOptions, queryClient} = useDefaultOptions()
 
-  return useMutation(
+  const rqMutation = useMutation(
     departmentId => client(`department/${departmentId}`, {method: 'DELETE'}),
     {
       onMutate: removedItem => {
@@ -44,15 +44,45 @@ function useDeleteDepartment(options) {
       ...options,
     },
   )
+
+  return {deleteDepartment: rqMutation.mutate, ...rqMutation}
 }
 
 function useCreateDepartment(options) {
   const {defaultMutationOptions} = useDefaultOptions()
 
-  return useMutation(department => client('department', department), {
-    ...defaultMutationOptions,
-    ...options,
-  })
+  const rqMutation = useMutation(
+    department => client('department', {data: {DepartmentName: department}}),
+    {
+      ...defaultMutationOptions,
+      ...options,
+    },
+  )
+
+  return {createDepartment: rqMutation.mutate, ...rqMutation}
 }
 
-export {useCreateDepartment, useDepartments, useDeleteDepartment}
+function useUpdateDepartment(options) {
+  const {defaultMutationOptions} = useDefaultOptions()
+
+  const rqMutation = useMutation(
+    department =>
+      client('department', {
+        data: department,
+        method: 'PUT',
+      }),
+    {
+      ...defaultMutationOptions,
+      ...options,
+    },
+  )
+
+  return {updateDepartment: rqMutation.mutate, ...rqMutation}
+}
+
+export {
+  useCreateDepartment,
+  useDeleteDepartment,
+  useDepartments,
+  useUpdateDepartment,
+}

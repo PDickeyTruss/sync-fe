@@ -14,6 +14,7 @@ import {
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline'
 
 import {AddDepartmentDialog} from 'components/AddDepartmentDialog'
+import {UpdateDepartmentDialog} from 'components/UpdateDepartmentDialog'
 import {useDepartments, useDeleteDepartment} from 'utils/departments'
 import {Title} from 'components/Title'
 
@@ -29,8 +30,8 @@ const useStyles = makeStyles(theme => ({
 
 const Department = () => {
   const classes = useStyles()
-  const {departments, error, isLoading, isError, isSuccess} = useDepartments()
-  const {mutate: handleDelete} = useDeleteDepartment({throwOnError: true})
+  const {departments} = useDepartments()
+  const {deleteDepartment} = useDeleteDepartment({throwOnError: true})
 
   return (
     <Paper className={classes.paper}>
@@ -62,9 +63,10 @@ const Department = () => {
                     size="small"
                     style={{width: '128px'}}
                   >
+                    <UpdateDepartmentDialog {...d} />
                     <IconButton
                       style={{padding: 0, marginLeft: 8, marginRight: 8}}
-                      onClick={() => handleDelete(d.DepartmentId)}
+                      onClick={() => deleteDepartment(d.DepartmentId)}
                     >
                       <DeleteOutlineIcon />
                     </IconButton>

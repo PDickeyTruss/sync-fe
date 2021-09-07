@@ -33,7 +33,7 @@ const Employee = () => {
   const classes = useStyles()
 
   const {employees, error, isLoading, isError, isSuccess} = useEmployees()
-  const {mutate: handleDelete} = useDeleteEmployee({throwOnError: true})
+  const {deleteEmployee} = useDeleteEmployee({throwOnError: true})
 
   return (
     <Paper className={classes.paper}>
@@ -72,7 +72,7 @@ const Employee = () => {
                     <UpdateEmployeeDialog {...e} />
                     <IconButton
                       style={{padding: 0, marginLeft: 8, marginRight: 8}}
-                      onClick={() => handleDelete(e.EmployeeId)}
+                      onClick={() => deleteEmployee(e.EmployeeId)}
                     >
                       <DeleteOutlineIcon />
                     </IconButton>

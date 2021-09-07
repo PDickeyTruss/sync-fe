@@ -1,5 +1,4 @@
 import React from 'react'
-import {useDepartments} from 'utils/departments'
 import {
   Button,
   Dialog,
@@ -13,9 +12,10 @@ import {
   InputLabel,
   IconButton,
 } from '@material-ui/core'
-
 import UpdateIcon from '@material-ui/icons/Update'
 import {makeStyles} from '@material-ui/core/styles'
+
+import {useDepartments} from 'utils/departments'
 import {useUpdateEmployee} from 'utils/employees'
 
 const useStyles = makeStyles(theme => ({
@@ -36,7 +36,7 @@ function UpdateEmployeeDialog(employee) {
   const [department, setDepartment] = React.useState('')
 
   const {departments} = useDepartments()
-  const {mutate: updateEmployee} = useUpdateEmployee()
+  const {updateEmployee} = useUpdateEmployee()
 
   const handleClickOpen = () => {
     setDepartment(Department)
@@ -59,7 +59,7 @@ function UpdateEmployeeDialog(employee) {
       Department: department,
     }
 
-    updateEmployee({data: updatedEmployee})
+    updateEmployee(updatedEmployee)
 
     setDepartment('')
     setOpen(false)

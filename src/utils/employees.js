@@ -28,7 +28,7 @@ function useDefaultOptions() {
 function useDeleteEmployee(options) {
   const {defaultMutationOptions, queryClient} = useDefaultOptions()
 
-  return useMutation(
+  const rqMutation = useMutation(
     employeeId => client(`employee/${employeeId}`, {method: 'DELETE'}),
     {
       onMutate: removedItem => {
@@ -43,27 +43,36 @@ function useDeleteEmployee(options) {
       ...options,
     },
   )
+
+  return {deleteEmployee: rqMutation.mutate, ...rqMutation}
 }
 
 function useCreateEmployee(options) {
   const {defaultMutationOptions} = useDefaultOptions()
 
-  return useMutation(employee => client('employee', employee), {
-    ...defaultMutationOptions,
-    ...options,
-  })
-}
-
-function useUpdateEmployee(options) {
-  const {defaultMutationOptions} = useDefaultOptions()
-
-  return useMutation(
-    employee => client('employee', {...employee, method: 'PUT'}),
+  const rqMutation = useMutation(
+    employee => client('employee', {data: employee}),
     {
       ...defaultMutationOptions,
       ...options,
     },
   )
+
+  return {createEmployee: rqMutation.mutate, ...rqMutation}
+}
+
+function useUpdateEmployee(options) {
+  const {defaultMutationOptions} = useDefaultOptions()
+
+  const rqMutation = useMutation(
+    employee => client('employee', {data: employee, method: 'PUT'}),
+    {
+      ...defaultMutationOptions,
+      ...options,
+    },
+  )
+
+  return {updateEmployee: rqMutation.mutate, ...rqMutation}
 }
 
 export {useCreateEmployee, useDeleteEmployee, useEmployees, useUpdateEmployee}
