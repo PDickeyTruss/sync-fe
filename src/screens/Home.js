@@ -57,7 +57,7 @@ function Home(props) {
         <Employee {...props} />
       </Grid>
       <Grid item xs={12}>
-        <Department {...props} />{' '}
+        <Department {...props} />
       </Grid>
     </Grid>
   )
