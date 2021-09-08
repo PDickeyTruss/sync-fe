@@ -30,13 +30,11 @@ function Home(props) {
 
   return (
     <Grid container spacing={3}>
-      {/* Departments */}
       <Grid item xs={12} md={8} lg={9}>
         <Paper className={fixedHeightPaper}>
           <Chart />
         </Paper>
       </Grid>
-      {/* Recent Deposits */}
       <Grid item xs={12} md={4} lg={3}>
         <Paper className={fixedHeightPaper}>
           <Title>Recent Deposits</Title>
