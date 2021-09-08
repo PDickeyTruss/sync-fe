@@ -18,7 +18,7 @@ import {
 } from '@material-ui/core'
 
 import {Title} from 'components/Title'
-import {EmployeeForm} from 'components/EmployeeForm'
+import {EmployeeForm} from 'forms/EmployeeForm'
 import {
   useEmployees,
   useCreateEmployee,

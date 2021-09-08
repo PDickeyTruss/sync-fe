@@ -3,7 +3,7 @@ import {client} from 'utils/api-client'
 
 function useDepartments() {
   const result = useQuery({
-    queryKey: 'departments',
+    queryKey: 'department',
     queryFn: () => client('department'),
   })
 
@@ -17,7 +17,7 @@ function useDefaultOptions() {
     onError: (err, variables, recover) =>
       typeof recover === 'function' ? recover() : null,
     onSettled: () => {
-      queryClient.invalidateQueries('departments')
+      queryClient.invalidateQueries('department')
     },
   }
 
@@ -31,14 +31,14 @@ function useDeleteDepartment(options) {
     departmentId => client(`department/${departmentId}`, {method: 'DELETE'}),
     {
       onMutate: removedItem => {
-        const previousItems = queryClient.getQueryData('departments')
-        queryClient.setQueryData('departments', old => {
+        const previousItems = queryClient.getQueryData('department')
+        queryClient.setQueryData('department', old => {
           return old.filter(
             item => item.DepartmentId !== removedItem.DepartmentId,
           )
         })
 
-        return () => queryClient.setQueryData('departments', previousItems)
+        return () => queryClient.setQueryData('department', previousItems)
       },
       ...defaultMutationOptions,
       ...options,
@@ -52,7 +52,7 @@ function useCreateDepartment(options) {
   const {defaultMutationOptions} = useDefaultOptions()
 
   const rqMutation = useMutation(
-    department => client('department', {data: {DepartmentName: department}}),
+    department => client('department', {data: department}),
     {
       ...defaultMutationOptions,
       ...options,

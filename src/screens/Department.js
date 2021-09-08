@@ -1,34 +1,65 @@
 import React from 'react'
+
 import {makeStyles} from '@material-ui/core/styles'
+
+import AddCircleIcon from '@material-ui/icons/AddCircle'
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline'
+import UpdateIcon from '@material-ui/icons/Update'
 import {
+  Box,
+  Button,
+  IconButton,
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
-  Box,
-  IconButton,
 } from '@material-ui/core'
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline'
 
-import {AddDepartmentDialog} from 'components/AddDepartmentDialog'
-import {UpdateDepartmentDialog} from 'components/UpdateDepartmentDialog'
-import {useDepartments, useDeleteDepartment} from 'utils/departments'
 import {Title} from 'components/Title'
+import {DepartmentForm} from 'forms/DepartmentForm'
+import {
+  useDepartments,
+  useDeleteDepartment,
+  useCreateDepartment,
+  useUpdateDepartment,
+} from 'utils/departments'
+
+import {
+  Dialog,
+  DialogCloseButton,
+  DialogOpenButton,
+  DialogContents,
+  DialogSubmitButton,
+  DialogForm,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from 'components/Dialog'
 
 const useStyles = makeStyles(theme => ({
   paper: {
     padding: theme.spacing(2),
     width: '100%',
   },
+  root: {
+    '& .MuiFormControl-root': {
+      marginTop: theme.spacing(1),
+      marginBottom: theme.spacing(1),
+    },
+    padding: theme.spacing(1),
+  },
 }))
 
 const Department = () => {
   const classes = useStyles()
+
   const {departments} = useDepartments()
-  const {deleteDepartment} = useDeleteDepartment({throwOnError: true})
+  const {createDepartment} = useCreateDepartment()
+  const {updateDepartment} = useUpdateDepartment()
+  const {deleteDepartment} = useDeleteDepartment()
 
   return (
     <Paper className={classes.paper}>
@@ -37,7 +68,40 @@ const Department = () => {
           <Title>Departments</Title>
         </Box>
         <Box>
-          <AddDepartmentDialog />
+          <Dialog>
+            <DialogOpenButton>
+              <Button
+                aria-label="add department"
+                variant="contained"
+                color="primary"
+                startIcon={<AddCircleIcon />}
+                style={{marginBottom: 8}}
+              >
+                Add
+              </Button>
+            </DialogOpenButton>
+            <DialogContents>
+              <DialogTitle>Add Department</DialogTitle>
+              <DialogContent>
+                <DialogForm
+                  onSubmit={createDepartment}
+                  defaultValues={{
+                    DepartmentName: '',
+                  }}
+                >
+                  <DepartmentForm />
+                  <DialogActions>
+                    <DialogCloseButton>
+                      <Button color="primary">Cancel</Button>
+                    </DialogCloseButton>
+                    <DialogSubmitButton>
+                      <Button color="primary">Submit</Button>
+                    </DialogSubmitButton>
+                  </DialogActions>
+                </DialogForm>
+              </DialogContent>
+            </DialogContents>
+          </Dialog>
         </Box>
       </Box>
       <TableContainer component={Paper} elevation={0}>
@@ -60,7 +124,34 @@ const Department = () => {
                     size="small"
                     style={{width: '128px'}}
                   >
-                    <UpdateDepartmentDialog {...d} />
+                    <Dialog>
+                      <DialogOpenButton>
+                        <IconButton
+                          style={{padding: 0, marginLeft: 8, marginRight: 8}}
+                        >
+                          <UpdateIcon />
+                        </IconButton>
+                      </DialogOpenButton>
+                      <DialogContents>
+                        <DialogTitle>Update Department</DialogTitle>
+                        <DialogContent>
+                          <DialogForm
+                            onSubmit={updateDepartment}
+                            defaultValues={{...d}}
+                          >
+                            <DepartmentForm />
+                            <DialogActions>
+                              <DialogCloseButton>
+                                <Button color="primary">Cancel</Button>
+                              </DialogCloseButton>
+                              <DialogSubmitButton>
+                                <Button color="primary">Submit</Button>
+                              </DialogSubmitButton>
+                            </DialogActions>
+                          </DialogForm>
+                        </DialogContent>
+                      </DialogContents>
+                    </Dialog>
                     <IconButton
                       style={{padding: 0, marginLeft: 8, marginRight: 8}}
                       onClick={() => deleteDepartment(d.DepartmentId)}
