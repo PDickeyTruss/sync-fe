@@ -15,6 +15,11 @@ function AppRoutes(props) {
       <Route path="/department">
         <Department {...props} />
       </Route>
+      <Route>
+        <h1 style={{margin: 'auto', width: '100%', textAlign: 'center'}}>
+          Page Not Found
+        </h1>
+      </Route>
     </Switch>
   )
 }
