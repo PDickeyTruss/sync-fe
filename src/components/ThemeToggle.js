@@ -7,15 +7,15 @@ import Brightness7Icon from '@material-ui/icons/Brightness7'
 function ThemeToggle() {
   const {isDarkMode, toggleDarkMode} = useTheme()
   return (
-    <div
+    <IconButton
       onClick={() => {
         toggleDarkMode()
       }}
+      aria-label="toggle dark mode"
+      color="inherit"
     >
-      <IconButton aria-label="toggle dark mode" color="inherit">
-        {isDarkMode ? <Brightness7Icon /> : <Brightness4Icon />}
-      </IconButton>
-    </div>
+      {isDarkMode ? <Brightness7Icon /> : <Brightness4Icon />}
+    </IconButton>
   )
 }
 

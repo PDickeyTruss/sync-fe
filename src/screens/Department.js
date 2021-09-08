@@ -19,9 +19,6 @@ import {useDepartments, useDeleteDepartment} from 'utils/departments'
 import {Title} from 'components/Title'
 
 const useStyles = makeStyles(theme => ({
-  table: {
-    minWidth: 650,
-  },
   paper: {
     padding: theme.spacing(2),
     width: '100%',
@@ -44,7 +41,7 @@ const Department = () => {
         </Box>
       </Box>
       <TableContainer component={Paper} elevation={0}>
-        <Table className={classes.table} aria-label="departments table">
+        <Table aria-label="departments table">
           <TableHead>
             <TableRow>
               <TableCell>ID</TableCell>

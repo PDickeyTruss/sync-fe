@@ -17,15 +17,14 @@ import {
   TableRow,
 } from '@material-ui/core'
 
+import {Title} from 'components/Title'
+import {EmployeeForm} from 'components/EmployeeForm'
 import {
   useEmployees,
   useCreateEmployee,
   useUpdateEmployee,
   useDeleteEmployee,
 } from 'utils/employees'
-
-import {Title} from 'components/Title'
-import {EmployeeForm} from 'components/EmployeeForm'
 
 import {
   Dialog,
@@ -40,9 +39,6 @@ import {
 } from 'components/Dialog'
 
 const useStyles = makeStyles(theme => ({
-  table: {
-    minWidth: 650,
-  },
   paper: {
     padding: theme.spacing(2),
     width: '100%',
@@ -68,7 +64,7 @@ function buildDateString() {
   return dateString
 }
 
-const Employee = ({employee}) => {
+const Employee = () => {
   const classes = useStyles()
 
   const {employees} = useEmployees()
@@ -122,7 +118,7 @@ const Employee = ({employee}) => {
         </Box>
       </Box>
       <TableContainer component={Paper} elevation={0}>
-        <Table className={classes.table} aria-label="employees table">
+        <Table aria-label="employees table">
           <TableHead>
             <TableRow>
               <TableCell>ID</TableCell>
