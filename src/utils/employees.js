@@ -2,10 +2,12 @@ import {useQuery, useMutation, useQueryClient} from 'react-query'
 
 import {client} from 'utils/api-client'
 
+const EMPLOYEE = 'employee'
+
 function useEmployees() {
   const result = useQuery({
-    queryKey: 'employee',
-    queryFn: () => client('employee'),
+    queryKey: EMPLOYEE,
+    queryFn: () => client(EMPLOYEE),
   })
 
   return {...result, employees: result.data}
@@ -18,7 +20,7 @@ function useDefaultOptions() {
     onError: (err, variables, recover) =>
       typeof recover === 'function' ? recover() : null,
     onSettled: () => {
-      queryClient.invalidateQueries('employee')
+      queryClient.invalidateQueries(EMPLOYEE)
     },
   }
 
@@ -32,14 +34,14 @@ function useDeleteEmployee(options) {
     employeeId => client(`employee/${employeeId}`, {method: 'DELETE'}),
     {
       onMutate: removedItem => {
-        const previousItems = queryClient.getQueryData('employee')
-        queryClient.setQueryData('employee', old => {
+        const previousItems = queryClient.getQueryData(EMPLOYEE)
+        queryClient.setQueryData(EMPLOYEE, old => {
           return old.filter(
             item => item.employee_id !== removedItem.employee_id,
           )
         })
 
-        return () => queryClient.setQueryData('employee', previousItems)
+        return () => queryClient.setQueryData(EMPLOYEE, previousItems)
       },
       ...defaultMutationOptions,
       ...options,
@@ -53,7 +55,7 @@ function useCreateEmployee(options) {
   const {defaultMutationOptions} = useDefaultOptions()
 
   const rqMutation = useMutation(
-    employee => client('employee', {data: employee}),
+    employee => client(EMPLOYEE, {data: employee}),
     {
       ...defaultMutationOptions,
       ...options,
@@ -67,7 +69,7 @@ function useUpdateEmployee(options) {
   const {defaultMutationOptions} = useDefaultOptions()
 
   const rqMutation = useMutation(
-    employee => client('employee', {data: employee, method: 'PUT'}),
+    employee => client(EMPLOYEE, {data: employee, method: 'PUT'}),
     {
       ...defaultMutationOptions,
       ...options,

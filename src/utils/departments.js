@@ -1,10 +1,12 @@
 import {useQuery, useMutation, useQueryClient} from 'react-query'
 import {client} from 'utils/api-client'
 
+const DEPARTMENT = 'department'
+
 function useDepartments() {
   const result = useQuery({
-    queryKey: 'department',
-    queryFn: () => client('department'),
+    queryKey: DEPARTMENT,
+    queryFn: () => client(DEPARTMENT),
   })
 
   return {...result, departments: result.data}
@@ -17,7 +19,7 @@ function useDefaultOptions() {
     onError: (err, variables, recover) =>
       typeof recover === 'function' ? recover() : null,
     onSettled: () => {
-      queryClient.invalidateQueries('department')
+      queryClient.invalidateQueries(DEPARTMENT)
       queryClient.invalidateQueries('employee')
     },
   }
@@ -32,14 +34,14 @@ function useDeleteDepartment(options) {
     departmentId => client(`department/${departmentId}`, {method: 'DELETE'}),
     {
       onMutate: removedItem => {
-        const previousItems = queryClient.getQueryData('department')
-        queryClient.setQueryData('department', old => {
+        const previousItems = queryClient.getQueryData(DEPARTMENT)
+        queryClient.setQueryData(DEPARTMENT, old => {
           return old.filter(
             item => item.department_id !== removedItem.department_id,
           )
         })
 
-        return () => queryClient.setQueryData('department', previousItems)
+        return () => queryClient.setQueryData(DEPARTMENT, previousItems)
       },
       ...defaultMutationOptions,
       ...options,
@@ -53,7 +55,7 @@ function useCreateDepartment(options) {
   const {defaultMutationOptions} = useDefaultOptions()
 
   const rqMutation = useMutation(
-    department => client('department', {data: department}),
+    department => client(DEPARTMENT, {data: department}),
     {
       ...defaultMutationOptions,
       ...options,
@@ -68,7 +70,7 @@ function useUpdateDepartment(options) {
 
   const rqMutation = useMutation(
     department =>
-      client('department', {
+      client(DEPARTMENT, {
         data: department,
         method: 'PUT',
       }),
