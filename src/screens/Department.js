@@ -86,7 +86,7 @@ const Department = () => {
                 <DialogForm
                   onSubmit={createDepartment}
                   defaultValues={{
-                    DepartmentName: '',
+                    department_name: '',
                   }}
                 >
                   <DepartmentForm />
@@ -116,9 +116,9 @@ const Department = () => {
           <TableBody>
             {departments ? (
               departments.map(d => (
-                <TableRow key={d.DepartmentId}>
-                  <TableCell>{d.DepartmentId}</TableCell>
-                  <TableCell>{d.DepartmentName}</TableCell>
+                <TableRow key={d.department_id}>
+                  <TableCell>{d.department_id}</TableCell>
+                  <TableCell>{d.department_name}</TableCell>
                   <TableCell
                     align="right"
                     size="small"
@@ -154,7 +154,7 @@ const Department = () => {
                     </Dialog>
                     <IconButton
                       style={{padding: 0, marginLeft: 8, marginRight: 8}}
-                      onClick={() => deleteDepartment(d.DepartmentId)}
+                      onClick={() => deleteDepartment(d.department_id)}
                     >
                       <DeleteOutlineIcon />
                     </IconButton>

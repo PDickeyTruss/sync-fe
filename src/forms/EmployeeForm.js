@@ -24,13 +24,13 @@ function EmployeeForm() {
     <React.Fragment>
       <TextField
         autoFocus
-        id="EmployeeName"
+        id="employee_name"
         label="Name"
         fullWidth
         InputLabelProps={{
           shrink: true,
         }}
-        value={formValues['EmployeeName']}
+        value={formValues.employee_name}
         onChange={e => updateFormValues(e.target.id, e.target.value)}
       />
 
@@ -40,14 +40,14 @@ function EmployeeForm() {
         </InputLabel>
         <Select
           labelId="Department-label"
-          id="Department"
-          value={formValues['Department']}
-          onChange={e => updateFormValues('Department', e.target.value)}
+          id="department"
+          value={formValues.department}
+          onChange={e => updateFormValues('department', e.target.value)}
         >
           {departments
             ? departments.map(d => (
-                <MenuItem key={d.DepartmentId} value={d.DepartmentId}>
-                  {d.DepartmentName}
+                <MenuItem key={d.department_id} value={d.department_id}>
+                  {d.department_name}
                 </MenuItem>
               ))
             : null}
@@ -55,11 +55,11 @@ function EmployeeForm() {
       </FormControl>
 
       <TextField
-        id="DateOfHire"
+        id="date_of_hire"
         label="Date of Hire"
         type="date"
         fullWidth
-        value={formValues['DateOfHire']}
+        value={formValues['date_of_hire']}
         InputLabelProps={{
           shrink: true,
         }}

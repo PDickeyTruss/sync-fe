@@ -97,9 +97,9 @@ const Employee = () => {
                 <DialogForm
                   onSubmit={createEmployee}
                   defaultValues={{
-                    DateOfHire: buildDateString(),
-                    Department: '',
-                    EmployeeName: '',
+                    date_of_hire: buildDateString(),
+                    department: '',
+                    employee_name: '',
                   }}
                 >
                   <EmployeeForm />
@@ -131,11 +131,11 @@ const Employee = () => {
           <TableBody>
             {employees ? (
               employees.map(e => (
-                <TableRow key={e.EmployeeId}>
-                  <TableCell>{e.EmployeeId}</TableCell>
-                  <TableCell>{e.EmployeeName}</TableCell>
-                  <TableCell>{e.Department}</TableCell>
-                  <TableCell>{e.DateOfHire}</TableCell>
+                <TableRow key={e.employee_id}>
+                  <TableCell>{e.employee_id}</TableCell>
+                  <TableCell>{e.employee_name}</TableCell>
+                  <TableCell>{e.department.department_name}</TableCell>
+                  <TableCell>{e.date_of_hire}</TableCell>
                   <TableCell
                     align="right"
                     size="small"
@@ -154,7 +154,10 @@ const Employee = () => {
                         <DialogContent>
                           <DialogForm
                             onSubmit={updateEmployee}
-                            defaultValues={{...e}}
+                            defaultValues={{
+                              ...e,
+                              department: e.department.department_id,
+                            }}
                           >
                             <EmployeeForm />
                             <DialogActions>
@@ -171,7 +174,7 @@ const Employee = () => {
                     </Dialog>
                     <IconButton
                       style={{padding: 0, marginLeft: 8, marginRight: 8}}
-                      onClick={() => deleteEmployee(e.EmployeeId)}
+                      onClick={() => deleteEmployee(e.employee_id)}
                     >
                       <DeleteOutlineIcon />
                     </IconButton>

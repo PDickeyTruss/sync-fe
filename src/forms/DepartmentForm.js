@@ -16,10 +16,10 @@ function DepartmentForm() {
     <React.Fragment>
       <TextField
         autoFocus
-        id="DepartmentName"
+        id="department_name"
         label="Name"
         fullWidth
-        value={formValues['DepartmentName']}
+        value={formValues['department_name']}
         InputLabelProps={{
           shrink: true,
         }}

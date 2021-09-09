@@ -34,7 +34,9 @@ function useDeleteEmployee(options) {
       onMutate: removedItem => {
         const previousItems = queryClient.getQueryData('employee')
         queryClient.setQueryData('employee', old => {
-          return old.filter(item => item.EmployeeId !== removedItem.EmployeeId)
+          return old.filter(
+            item => item.employee_id !== removedItem.employee_id,
+          )
         })
 
         return () => queryClient.setQueryData('employee', previousItems)

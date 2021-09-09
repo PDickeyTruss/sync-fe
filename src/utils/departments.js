@@ -18,6 +18,7 @@ function useDefaultOptions() {
       typeof recover === 'function' ? recover() : null,
     onSettled: () => {
       queryClient.invalidateQueries('department')
+      queryClient.invalidateQueries('employee')
     },
   }
 
@@ -34,7 +35,7 @@ function useDeleteDepartment(options) {
         const previousItems = queryClient.getQueryData('department')
         queryClient.setQueryData('department', old => {
           return old.filter(
-            item => item.DepartmentId !== removedItem.DepartmentId,
+            item => item.department_id !== removedItem.department_id,
           )
         })
 
