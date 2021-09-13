@@ -2,7 +2,7 @@ import React from 'react'
 import clsx from 'clsx'
 
 import {makeStyles} from '@material-ui/core/styles'
-import {Typography, Grid, Paper, Link} from '@material-ui/core/Link'
+import {Typography, Grid, Paper, Link} from '@material-ui/core'
 
 import {Title} from 'components/Title'
 import {Chart} from 'components/Chart'
