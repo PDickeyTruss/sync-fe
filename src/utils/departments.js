@@ -20,7 +20,7 @@ function useDefaultOptions() {
       typeof recover === 'function' ? recover() : null,
     onSettled: () => {
       queryClient.invalidateQueries(DEPARTMENT)
-      //queryClient.invalidateQueries('employee')
+      queryClient.invalidateQueries('employee')
     },
   }
 
