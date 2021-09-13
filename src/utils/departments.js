@@ -20,7 +20,7 @@ function useDefaultOptions() {
       typeof recover === 'function' ? recover() : null,
     onSettled: () => {
       queryClient.invalidateQueries(DEPARTMENT)
-      queryClient.invalidateQueries('employee')
+      //queryClient.invalidateQueries('employee')
     },
   }
 
@@ -41,6 +41,7 @@ function useDeleteDepartment(options) {
           )
         })
 
+        // Used to roll back the above 'optomistic updates' in event of failure
         return () => queryClient.setQueryData(DEPARTMENT, previousItems)
       },
       ...defaultMutationOptions,

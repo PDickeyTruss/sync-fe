@@ -1,10 +1,9 @@
-import clsx from 'clsx'
-import {makeStyles} from '@material-ui/core/styles'
 import React from 'react'
-import Typography from '@material-ui/core/Typography'
-import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper'
-import Link from '@material-ui/core/Link'
+import clsx from 'clsx'
+
+import {makeStyles} from '@material-ui/core/styles'
+import {Typography, Grid, Paper, Link} from '@material-ui/core/Link'
+
 import {Title} from 'components/Title'
 import {Chart} from 'components/Chart'
 import {Employee} from 'screens/Employee'
@@ -39,10 +38,10 @@ function Home(props) {
         <Paper className={fixedHeightPaper}>
           <Title>Recent Deposits</Title>
           <Typography component="p" variant="h4">
-            $3,024.00
+            $4,024.04
           </Typography>
           <Typography color="textSecondary" className={classes.depositContext}>
-            on 15 March, 2019
+            on 13 March, 2021
           </Typography>
           <div>
             <Link color="primary" href="#">

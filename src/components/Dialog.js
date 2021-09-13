@@ -34,6 +34,13 @@ function Dialog(props) {
   return <DialogContext.Provider value={[open, setOpen]} {...props} />
 }
 
+function DialogOpenButton({children: child}) {
+  const [, setOpen] = React.useContext(DialogContext)
+  return React.cloneElement(child, {
+    onClick: callAll(() => setOpen(true), child.props.onClick),
+  })
+}
+
 function DialogCloseButton({children: child}) {
   const [, setIsOpen] = React.useContext(DialogContext)
   return React.cloneElement(child, {
@@ -46,13 +53,6 @@ function DialogSubmitButton({children: child}) {
   return React.cloneElement(child, {
     type: 'submit',
     onClick: callAll(() => setIsOpen(false), child.props.onClick),
-  })
-}
-
-function DialogOpenButton({children: child}) {
-  const [, setOpen] = React.useContext(DialogContext)
-  return React.cloneElement(child, {
-    onClick: callAll(() => setOpen(true), child.props.onClick),
   })
 }
 
@@ -75,7 +75,9 @@ function DialogForm({defaultValues, onSubmit, ...props}) {
   const classes = useStyles()
   return (
     <FormContext.Provider value={[formValues, setFormValues]}>
-      <form {...props} onSubmit={handleOnSubmit} className={classes.root} />
+      <DialogContent>
+        <form {...props} onSubmit={handleOnSubmit} className={classes.root} />
+      </DialogContent>
     </FormContext.Provider>
   )
 }

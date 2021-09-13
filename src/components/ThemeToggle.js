@@ -8,9 +8,7 @@ function ThemeToggle() {
   const {isDarkMode, toggleDarkMode} = useTheme()
   return (
     <IconButton
-      onClick={() => {
-        toggleDarkMode()
-      }}
+      onClick={toggleDarkMode}
       aria-label="toggle dark mode"
       color="inherit"
     >

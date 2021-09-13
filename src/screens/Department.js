@@ -35,7 +35,6 @@ import {
   DialogSubmitButton,
   DialogForm,
   DialogActions,
-  DialogContent,
   DialogTitle,
 } from 'components/Dialog'
 
@@ -82,24 +81,22 @@ const Department = () => {
             </DialogOpenButton>
             <DialogContents>
               <DialogTitle>Add Department</DialogTitle>
-              <DialogContent>
-                <DialogForm
-                  onSubmit={createDepartment}
-                  defaultValues={{
-                    department_name: '',
-                  }}
-                >
-                  <DepartmentForm />
-                  <DialogActions>
-                    <DialogCloseButton>
-                      <Button color="primary">Cancel</Button>
-                    </DialogCloseButton>
-                    <DialogSubmitButton>
-                      <Button color="primary">Submit</Button>
-                    </DialogSubmitButton>
-                  </DialogActions>
-                </DialogForm>
-              </DialogContent>
+              <DialogForm
+                onSubmit={createDepartment}
+                defaultValues={{
+                  department_name: '',
+                }}
+              >
+                <DepartmentForm />
+                <DialogActions>
+                  <DialogCloseButton>
+                    <Button color="primary">Cancel</Button>
+                  </DialogCloseButton>
+                  <DialogSubmitButton>
+                    <Button color="primary">Submit</Button>
+                  </DialogSubmitButton>
+                </DialogActions>
+              </DialogForm>
             </DialogContents>
           </Dialog>
         </Box>
@@ -134,22 +131,20 @@ const Department = () => {
                       </DialogOpenButton>
                       <DialogContents>
                         <DialogTitle>Update Department</DialogTitle>
-                        <DialogContent>
-                          <DialogForm
-                            onSubmit={updateDepartment}
-                            defaultValues={{...d}}
-                          >
-                            <DepartmentForm />
-                            <DialogActions>
-                              <DialogCloseButton>
-                                <Button color="primary">Cancel</Button>
-                              </DialogCloseButton>
-                              <DialogSubmitButton>
-                                <Button color="primary">Submit</Button>
-                              </DialogSubmitButton>
-                            </DialogActions>
-                          </DialogForm>
-                        </DialogContent>
+                        <DialogForm
+                          onSubmit={updateDepartment}
+                          defaultValues={{...d}}
+                        >
+                          <DepartmentForm />
+                          <DialogActions>
+                            <DialogCloseButton>
+                              <Button color="primary">Cancel</Button>
+                            </DialogCloseButton>
+                            <DialogSubmitButton>
+                              <Button color="primary">Submit</Button>
+                            </DialogSubmitButton>
+                          </DialogActions>
+                        </DialogForm>
                       </DialogContents>
                     </Dialog>
                     <IconButton
